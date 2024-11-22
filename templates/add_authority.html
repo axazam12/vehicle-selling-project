@@ -1,0 +1,13 @@
+{% extends 'adminpage.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1 style="text-align:center; color:red"><b>Add Authority</b></h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+        {{u_form|crispy}}
+        {{e_form|crispy}}
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>
+{% endblock %}

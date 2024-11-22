@@ -1,0 +1,53 @@
+{% extends 'adminpage.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="card">
+<div class="card">
+
+        <div class="card-header  bg-primary">
+            <strong class="card-title " style="color:white">SCRAP DETAILS</strong>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+    <tr>
+        <th scope="col">SI NO</th>
+        <th scope="col">Vehicle Type</th>
+        <th scope="col">Vehicle Name</th>
+        <th scope="col">Fuel Type</th>
+        <th scope="col">Photo</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Location</th>
+        <th scope="col">Phone No</th>
+        <th scope="col">Delete</th>
+    </tr>
+                </thead>
+                <tbody>
+    {% for i in data %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.vehicle_type}}</td>
+        <td>{{i.vahicle_name}}</td>
+        <td>{{i.Fuel_Type}}</td>
+        <td><img src="{{ i.photo.url }}" style=" height:80px"></td>
+        <td>{{i.Expected_amount}}</td>
+        <td>{{i.Location}}</td>
+        <td>{{i.Phone_No}}</td>
+         <td>
+                        <form action="{% url 'reject_ad' i.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+
+
+    </tr>
+    {% endfor %}
+                </tbody>
+</table>
+</div>
+</div>
+</div>
+
+{% endblock %}

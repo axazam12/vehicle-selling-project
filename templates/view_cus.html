@@ -1,0 +1,57 @@
+{% extends 'adminpage.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="card">
+<div class="card">
+
+        <div class="card-header  bg-primary">
+            <strong class="card-title " style="color:white">CUSTOMER DETAILS</strong>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+    <tr>
+        <th scope="col">SI NO</th>
+        <th scope="col">NAME</th>
+        <th scope="col">ADDRESS</th>
+        <th scope="col">EMAIL</th>
+        <th scope="col">PHONE NO</th>
+        <th scope="col">PHOTO</th>
+        <th scope="col">Approve</th>
+        <th scope="col">Delete</th>
+    </tr>
+                </thead>
+                <tbody>
+    {% for i in data %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.name}}</td>
+        <td>{{i.address}}</td>
+        <td>{{i.email}}</td>
+        <td>{{i.phone_no}}</td>
+        <td><img src="{{ i.photo.url }}" style=" height:80px"></td>
+        <td>
+                        {% if i.approval_status == 0 %}
+                        <a class="btn btn-warning" href="{% url 'approve_customer' i.user_id %}">Approve</a>
+                        {% elif i.approval_status == 1 %}
+                        <button class="btn btn-success">Approved</button>
+                        {% else %}
+                        <button class="btn btn-warning">Rejected</button>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <form action="{% url 'reject_customer' i.user_id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+    </tr>
+    {% endfor %}
+                </tbody>
+</table>
+</div>
+</div>
+</div>
+
+{% endblock %}

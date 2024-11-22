@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Motor Vehicle Department</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .header {
+            background-color: #007bff;
+            padding: 20px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .container {
+            margin-top: 30px;
+        }
+
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>Motor Vehicle Department</h1>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+        <div class="card">
+<div class="card">
+
+        <div class="card-header  bg-primary">
+            <strong class="card-title " style="color:white">SCRAP DETAILS</strong>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+    <tr>
+        <th scope="col">SI NO</th>
+        <th scope="col">Vehicle Type</th>
+        <th scope="col">Vehicle Name</th>
+        <th scope="col">Fuel Type</th>
+        <th scope="col">Photo</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Location</th>
+        <th scope="col">Phone No</th>
+        <th scope="col">Approve</th>
+    </tr>
+                </thead>
+                <tbody>
+    {% for i in data %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.vehicle_type}}</td>
+        <td>{{i.vahicle_name}}</td>
+        <td>{{i.Fuel_Type}}</td>
+        <td><img src="{{ i.photo.url }}" style=" height:80px"></td>
+        <td>{{i.Expected_amount}}</td>
+        <td>{{i.Location}}</td>
+        <td>{{i.Phone_No}}</td>
+        <td>
+                        {% if i.approval_status == 0 %}
+                        <a class="btn btn-warning" href="{% url 'approve_ad' i.id %}">Approve</a>
+                        {% elif i.approval_status == 1 %}
+                        <button class="btn btn-success">Approved</button>
+                        {% else %}
+                        <button class="btn btn-warning">Rejected</button>
+                        {% endif %}
+                    </td>
+                    <td>
+      <td><a href="{% url 'authoritypage' %}">Go Back <i class="bi bi-box-arrow-in-left"></i></a></td>
+
+
+    </tr>
+    {% endfor %}
+                </tbody>
+</table>
+</div>
+</div>
+</div>
+            </div>
+            </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+
